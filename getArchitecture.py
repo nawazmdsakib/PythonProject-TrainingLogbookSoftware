@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
-"""
+'''
 Created on Wed Mar 22 00:31:00 2023
 
-@author: Sakib
-"""
+@author: Md Sakib Nawaz
+'''
 
+# Class code.
+
+'''
+A class to get architecture configurations for multiple
+models based on user choice from the options provided.
+'''
 class GetArchitectureClass:
+    
+    # Initialize the class with the number of models to configure.
     def __init__(self, num_models):
         self.allowed_activations = ['relu', 'sigmoid', 'tanh']    
         self.architectures, self.pooling_sizes, self.padding, self.num_epochs = self.get_architecture(num_models)
       
-
+    # Method to get architecture configurations for a specified number of models.
     def get_architecture(self, num_models):
         allowed_activations = ['relu', 'sigmoid', 'tanh']
         architectures = []     
@@ -18,9 +26,10 @@ class GetArchitectureClass:
         padding = []  
         num_epochs = [] 
         
-        
+        # Iterate through the number of models and get their configurations.
         for i in range(num_models):
             
+            # Get the number of epochs for the model.
             while True:
                 try:
                     user_input = input(f"\nEnter the number of epochs for model {i + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
@@ -33,7 +42,8 @@ class GetArchitectureClass:
                 except ValueError:
                     print("\n\nWrong Input!!!\n\nPlease enter an integer or 'b' or 'e'\n")
             num_epochs.append(input_num_epochs) 
-
+            
+            # Get the pooling size for the model.
             while True:
                 try:
                     user_input = input(f"\nEnter the pooling size for model {i + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
@@ -47,6 +57,7 @@ class GetArchitectureClass:
                     print("\n\nWrong Input!!!\n\nPlease enter an integer or 'b' or 'e'\n")
             pooling_sizes.append(pooling_size)
             
+            # Get the padding type for the model.
             while True:
                 user_input = input(f"\nEnter the padding for model {i + 1} (valid, same)\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
                 if user_input.lower() == 'b':
@@ -60,6 +71,7 @@ class GetArchitectureClass:
                 else:
                     print("\n\nWrong Input!!!\n\nPlease enter 'valid' or 'same' or 'b' or 'e'\n")
             
+            # Get the number of layers and their configurations for the model.
             layers = []
             while True:
                 try:
@@ -73,7 +85,7 @@ class GetArchitectureClass:
                 except ValueError:
                     print("\n\nWrong Input!!!\n\nPlease enter an integer or 'b' or 'e'\n")
            
-            
+            # Get layer details for each layer in the model.
             for j in range(num_layers):
                 while True:
                     user_input = input(f"\nEnter the layer type for layer {j + 1} (Conv2D or Dense)\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
@@ -85,6 +97,7 @@ class GetArchitectureClass:
                     layer_type = user_input
                     if layer_type == 'Conv2D':
                         
+                        # Get the number of filters, kernel size, and activation for the Conv2D layer.
                         while True:
                             try:
                                 user_input = input(f"\nEnter the number of filters for layer {j + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
@@ -122,6 +135,7 @@ class GetArchitectureClass:
                     
                     elif layer_type == 'Dense':
                         
+                        # Get the number of nodes and activation for the Dense layer.
                         while True:
                             try:
                                 user_input = input(f"\nEnter the number of nodes for layer {j + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
@@ -149,9 +163,12 @@ class GetArchitectureClass:
                     else:
                         print("\n\nWrong Input!!!\n\nPlease enter a valid layer type (Conv2D or Dense) or 'b' or 'e'\n")
                     
+                    # If a valid layer type is entered, break the loop.
                     if layer_type == 'Conv2D' or layer_type == 'Dense':
                         break
                
+             # Add the configured layers for the model to the architectures list.
             architectures.append(layers)
         
+        # Return the collected architectures, pooling_sizes, padding, and num_epochs.
         return architectures, pooling_sizes, padding, num_epochs
