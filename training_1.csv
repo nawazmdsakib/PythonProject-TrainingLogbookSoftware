@@ -1,0 +1,2 @@
+Model Name,Architecture,Number of Epochs,Training Accuracy,Validation Accuracy,Training Loss,Validation Loss
+model_1,"Dense_1, Flatten",2,0.8407333493232727,0.8331999778747559,0.4619806408882141,0.46891093254089355
