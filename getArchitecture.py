@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Sat Mar 25 00:57:07 2023
+
+@author: Sakib
+"""
+
+# -*- coding: utf-8 -*-
 '''
 Created on Wed Mar 22 00:31:00 2023
 
@@ -32,7 +39,7 @@ class GetArchitectureClass:
             # Get the number of epochs for the model.
             while True:
                 try:
-                    user_input = input(f"\nEnter the number of epochs for model {i + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
+                    user_input = input(f"\n\nEnter the number of Epochs for model {i + 1}\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                     if user_input.lower() == 'b':
                         return (False,False,False,False)
                     if user_input.lower() == 'e':
@@ -46,7 +53,7 @@ class GetArchitectureClass:
             # Get the pooling size for the model.
             while True:
                 try:
-                    user_input = input(f"\nEnter the pooling size for model {i + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
+                    user_input = input(f"\n\nEnter the Pooling size for model {i + 1}\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                     if user_input.lower() == 'b':
                         return (False,False,False,False)
                     if user_input.lower() == 'e':
@@ -59,23 +66,23 @@ class GetArchitectureClass:
             
             # Get the padding type for the model.
             while True:
-                user_input = input(f"\nEnter the padding for model {i + 1} (valid, same)\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
-                if user_input.lower() == 'b':
-                    return (False,False,False,False)
-                if user_input.lower() == 'e':
-                    return (None,None,None,None)
+                user_input = input(f"\n\nEnter the Padding for model {i + 1} (valid, same)\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                 padding_type = user_input.lower()
+                if padding_type == 'b':
+                    return (False,False,False,False)
+                if padding_type == 'e':
+                    return (None,None,None,None)
                 if padding_type == 'valid' or padding_type == 'same':
-                    padding.append(padding_type) 
+                    padding.append(padding_type)
                     break
                 else:
                     print("\n\nWrong Input!!!\n\nPlease enter 'valid' or 'same' or 'b' or 'e'\n")
-            
+    
             # Get the number of layers and their configurations for the model.
             layers = []
             while True:
                 try:
-                    user_input = input(f"\nPlease enter the number of layers for model {i + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
+                    user_input = input(f"\n\nEnter the number of Layers for model {i + 1}\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                     if user_input.lower() == 'b':
                         return (False,False,False,False)
                     if user_input.lower() == 'e':
@@ -88,19 +95,20 @@ class GetArchitectureClass:
             # Get layer details for each layer in the model.
             for j in range(num_layers):
                 while True:
-                    user_input = input(f"\nEnter the layer type for layer {j + 1} (Conv2D or Dense)\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
+                    user_input = input(f"\n\nEnter the Layer Type for layer {j + 1} of model {i + 1} (Conv2D or Dense)\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
+                    
                     if user_input.lower() == 'b':
                         return (False,False,False,False)
                     elif user_input.lower() == 'e':
                         return (None,None,None,None)
                     
-                    layer_type = user_input
-                    if layer_type == 'Conv2D':
+                    layer_type = user_input.lower()
+                    if layer_type == 'conv2d':
                         
                         # Get the number of filters, kernel size, and activation for the Conv2D layer.
                         while True:
                             try:
-                                user_input = input(f"\nEnter the number of filters for layer {j + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
+                                user_input = input(f"\n\nEnter the number of Filters for layer {j + 1} of model {i + 1}\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                                 if user_input.lower() == 'b':
                                     return (False,False,False,False)
                                 if user_input.lower() == 'e':
@@ -111,7 +119,7 @@ class GetArchitectureClass:
                                 print("\n\nWrong Input!!!\n\nPlease enter an integer or 'b' or 'e'\n")
                         while True:
                             try:
-                                user_input = input(f"\nEnter the kernel size for layer {j + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
+                                user_input = input(f"\n\nEnter the Kernel size for layer {j + 1} of model {i + 1}\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                                 if user_input.lower() == 'b':
                                     return (False,False,False,False)
                                 if user_input.lower() == 'e':
@@ -121,24 +129,25 @@ class GetArchitectureClass:
                             except ValueError:
                                 print("\n\nWrong Input!!!\n\nPlease enter an integer or 'b' or 'e'\n")
                         while True:
-                            user_input = input(f"\nEnter the activation function for layer {j + 1} (relu, sigmoid, tanh)\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
+                            user_input = input(f"\n\nEnter the Activation function for layer {j + 1} of model {i + 1} (relu, sigmoid, tanh)\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                             if user_input.lower() == 'b':
                                 return (False,False,False,False)
                             if user_input.lower() == 'e':
                                 return (None,None,None,None)
-                            activation = user_input
+                            
+                            activation = user_input.lower()
                             if activation in allowed_activations:
                                 layers.append(('Conv2D', filters, kernel_size, activation))
                                 break
                             else:
                                 print("\n\nWrong Input!!!\n\nPlease enter a valid activation function (relu, sigmoid, tanh) or 'b' or 'e'\n")
-                    
-                    elif layer_type == 'Dense':
+
+                    elif layer_type == 'dense':
                         
                         # Get the number of nodes and activation for the Dense layer.
                         while True:
                             try:
-                                user_input = input(f"\nEnter the number of nodes for layer {j + 1}\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
+                                user_input = input(f"\n\nEnter the number of Nodes for layer {j + 1} of model {i + 1}\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                                 if user_input.lower() == 'b':
                                     return (False,False,False,False)
                                 if user_input.lower() == 'e':
@@ -149,22 +158,24 @@ class GetArchitectureClass:
                                 print("\n\nWrong Input!!!\n\nPlease enter an integer or 'b' or 'e'\n")
 
                         while True:
-                            user_input = input(f"\nEnter the activation function for layer {j + 1} (relu, sigmoid, tanh)\nPress 'b' to go back to main menu or 'e' to exit\n\nPlease enter: ")
+                            user_input = input(f"\n\nEnter the Activation function for layer {j + 1} of model {i + 1} (relu, sigmoid, tanh)\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                             if user_input.lower() == 'b':
                                 return (False,False,False,False)
                             if user_input.lower() == 'e':
                                 return (None,None,None,None)
-                            activation = user_input
+                            
+                            activation = user_input.lower()
                             if activation in allowed_activations:
                                 layers.append(('Dense', nodes, activation))
                                 break
                             else:
                                 print("\n\nWrong Input!!!\n\nPlease enter a valid activation function (relu, sigmoid, tanh) or 'b' or 'e'\n")
+
                     else:
                         print("\n\nWrong Input!!!\n\nPlease enter a valid layer type (Conv2D or Dense) or 'b' or 'e'\n")
                     
                     # If a valid layer type is entered, break the loop.
-                    if layer_type == 'Conv2D' or layer_type == 'Dense':
+                    if layer_type == 'conv2d' or layer_type == 'dense':
                         break
                
              # Add the configured layers for the model to the architectures list.

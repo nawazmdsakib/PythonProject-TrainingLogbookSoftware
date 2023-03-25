@@ -7,8 +7,9 @@ Created on Tue Mar 21 20:43:06 2023
 
 # Main code.
 
-# sys library is imported.
+# sys and os libraries are imported.
 import sys
+import os
 
 # Classes are imported from the classes code files.
 from getDataset import GetDatasetClass
@@ -79,7 +80,7 @@ while True:
             else:
                 print('\nWrong Input!!!\n\nPlease enter numerical value 1-4')
                 continue   
- 
+
     # Start training option.
     elif choice == '2':
         
@@ -92,7 +93,8 @@ while True:
             
             # Prompt user to enter the number of models to be trained.
             while True:
-                num_models_input = input("\nPlease enter the number of the models to be trained (1-5)\nPress 'b' to go back to main menu or 'e' to exit the software\n\nPlease enter: ")
+                #num_models_input = input("\nEnter the number of the models to be trained (1-5)\nPress 'b' to go back to main menu or 'e' to exit the software\n\nPlease enter: ")
+                num_models_input = input("\n\nEnter the number of Models to be trained (1-5)\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                 
                 # Go back to the main menu.
                 if num_models_input.lower() == 'b':
@@ -100,7 +102,7 @@ while True:
                     break
                 
                 # Exit the program.
-                if num_models_input.lower() == 'e':
+                elif num_models_input.lower() == 'e':
                    print('\n\nExiting the software . . .\n\n***Thank you***')
                    sys.exit()
                 
@@ -143,22 +145,62 @@ while True:
                             
                             elif trained_models is not False:
                                 
-                                # Save the trained models.                    
-                                save_models_obj = SaveModelsClass(trained_models)
-                                print("\nReturning to the main menu . . .\n\nWhich function would you like to perform?\n")
-                                break                                                    
+                                # Prompt the user for a file name to save the .csv file and loop for getting the file name.
+                                while True:
+                                    csv_filename = input("\n\nEnter a file name to save the model details (without extension)\n|'b' for main menu | 'e' to exit\n\nPlease enter: ")
                             
+                                    if csv_filename.lower() == 'b':
+                                        print("\nReturning to the main menu . . .\n\nWhich function would you like to perform?\n")
+                                        break
+                            
+                                    elif csv_filename.lower() == 'e':
+                                        print("\n\nExiting the software . . .\n\n***Thank you***")
+                                        sys.exit()
+                            
+                                    csv_filename = f"{csv_filename}.csv"
+                            
+                                    # Check if the file already exists and handle user input.
+                                    if os.path.exists(csv_filename):
+                                        print(f"\nThe file named '{csv_filename}' already exists.")
+                                        overwrite = input("\n\nDo you want to overwrite the file? Enter (yes/no)\n|'b' for main menu | 'e' to exit\n\nPlease enter: ").lower()
+                                        if overwrite.lower() == 'yes':
+                                            pass
+                                        
+                                        elif overwrite.lower() == 'b':
+                                            print("\nReturning to the main menu . . .\n\nWhich function would you like to perform?\n")
+                                            break
+                                        
+                                        elif overwrite.lower() == 'e':
+                                            print("\n\nExiting the software . . .\n\n***Thank you***")
+                                            sys.exit()
+                                        
+                                        elif overwrite.lower() == 'no':
+                                            continue
+                                        else:
+                                            print("\n\nYou didn't enter any of these ('yes' or 'no' or 'b' or 'e')\n\nGoing back to the name input . . .\n")
+                                            continue                          
+
+                                    # Creating an object for SaveModelsClass and saving the models and csv file.
+                                    save_models_obj = SaveModelsClass(trained_models, csv_filename)
+                                    
+                                    if save_models_obj.error_occurred:
+                                        continue
+                                    
+                                    else:
+                                        print("\nReturning to the main menu . . .\n\nWhich function would you like to perform?\n")
+                                        break
+                                    
                             else:
                                 print("\nReturning to the main menu . . .\n\nWhich function would you like to perform?\n")
                                 break
-                      
+                            break
+                        break
                     else:
                         print("\n\nWrong Input!!!\n\nPlease enter an integer between (1-5) or 'b' or 'e'\n")
                         
                 except ValueError:
                     print("\n\nWrong Input!!!\n\nPlease enter an integer between (1-5) or 'b' or 'e'\n")
-                    
-                  
+    
     # Remove loaded data option.             
     elif choice == '3':
         

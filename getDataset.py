@@ -43,6 +43,10 @@ class GetDatasetClass:
             # Download the dataset with a progress bar.
             print("\nDataset is downloading:\n")
             data_dir = self.download_file_with_progress(dataset_url, 'flower_photos.tgz')
+            if not data_dir:
+                print("Dataset download failed due to OS error.")
+                return
+            
             data_dir = pathlib.Path(data_dir)
 
             # Extract the downloaded file.
@@ -61,30 +65,35 @@ class GetDatasetClass:
 
     # Download progress bar show function.
     def download_file_with_progress(self, url, filename):
+    
+        try:
+            # Download the file with a progress bar.
+            response = requests.get(url, stream=True)
+            total_size = int(response.headers.get('content-length', 0))
+            
+            # 1 Kibibyte.
+            block_size = 1024  
+            progress_bar = tqdm(total=total_size, unit='iB', unit_scale=True)
+            
+            # Write the downloaded data to a file.
+            with open(filename, 'wb') as file:
+                for data in response.iter_content(block_size):
+                    progress_bar.update(len(data))
+                    file.write(data)
+    
+            progress_bar.close()
+            
+            # Check if the download was successful.
+            if total_size != 0 and progress_bar.n != total_size:
+                print("Error: Download failed")
+                return False
+    
+            return filename
         
-        # Download the file with a progress bar.
-        response = requests.get(url, stream=True)
-        total_size = int(response.headers.get('content-length', 0))
-        
-        # 1 Kibibyte.
-        block_size = 1024  
-        progress_bar = tqdm(total=total_size, unit='iB', unit_scale=True)
-        
-        # Write the downloaded data to a file.
-        with open(filename, 'wb') as file:
-            for data in response.iter_content(block_size):
-                progress_bar.update(len(data))
-                file.write(data)
-
-        progress_bar.close()
-        
-        # Check if the download was successful.
-        if total_size != 0 and progress_bar.n != total_size:
-            print("Error: Download failed")
-            return None
-
-        return filename
-
+        except OSError as e:
+                print(f"OS error occurred: {e}")
+                return False
+    
     # Internet connection checking function.
     def is_connected(self):
         

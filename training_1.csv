@@ -1,2 +1,2 @@
 Model Name,Architecture,Number of Epochs,Training Accuracy,Validation Accuracy,Training Loss,Validation Loss
-model_1,"Dense_1, Flatten",2,0.8407333493232727,0.8331999778747559,0.4619806408882141,0.46891093254089355
+model_1,"Conv2D, MaxPooling2D, Flatten",1,0.7766166925430298,0.8385000228881836,0.6500681638717651,0.4578787684440613
