@@ -10,7 +10,7 @@ This software is designed to perform image classification tasks using deep learn
 
 This software has one main code Python file named main.py and 4 Class Python files named getDataset.py, getArchitecture.py, buildTrain.py, and saveModels.py. In getDataset.py file there is GetDatasetClass, in getArchitecture.py file there is GetArchitectureClass, in buildTrain.py file there are BuildTrainModelsClass, CustomEarlyStoppingand class, TqdmProgressCallback class, in saveModels.py file there is SaveModelsClass.
 
-Class: GetDatasetClass
+Class GetDatasetClass:
 This class downloads the flower dataset and loads the Fashion MNIST dataset. It checks for an active internet connection before downloading and displays a progress bar during the download. It also plots a sample image from the dataset.
 The following functions are available:
 * __init__(self): The class constructor initializes the dataset by downloading the flower dataset, loading the Fashion MNIST dataset, setting the class names, and plotting a sample image.
@@ -18,25 +18,25 @@ The following functions are available:
 * is_connected(self): This function checks if the device has an active internet connection by making a request to google.com. It returns True if connected and False otherwise.
 * plot_sample_image(self): This function plots a sample image from the dataset using the matplotlib.pyplot library.
 
-Class: GetArchitectureClass
+Class GetArchitectureClass:
 This class helps to get architecture configurations for multiple models based on user input. The class handles user input to configure the models with different layers, activation functions, pooling sizes, padding types, and number of epochs.
 The following functions are available:
 * __init__(self, num_models): The class constructor initializes the class with the number of models to configure. It calls the get_architecture method to set the architectures, pooling sizes, padding types, and number of epochs for each model.
 * get_architecture(self, num_models): This method gets architecture configurations for a specified number of models. It takes the user input to configure the number of epochs, pooling sizes, padding types, number of layers, and layer details (such as type, filters, kernel size, nodes, and activation functions) for each model. It returns the collected architectures, pooling sizes, padding types, and number of epochs.
 
-Class: BuildTrainClass
+Class BuildTrainClass:
 This class is designed to build and train multiple models based on user-defined architecture configurations. It takes in architectures, pooling sizes, padding, number of epochs, and training and evaluation datasets as input and returns trained models.
 The following functions are available:
 * __init__(self, architectures, pooling_sizes, padding, num_epochs, train_images, train_labels, eval_images, eval_labels): The class constructor initializes the class with the provided architectures, pooling sizes, padding, number of epochs, and training and evaluation datasets. It calls the build_and_train_models method to build and train the models.
 * build_and_train_models(self): This function builds and trains the models based on the provided architecture, pooling sizes, padding, and number of epochs. It reshapes the input images, constructs the model architectures using the given configurations, compiles the models, and trains them. The function returns a list of trained models and their training histories.
 
-Class: CustomEarlyStopping
+Class CustomEarlyStopping:
 This custom class extends the EarlyStopping class from Keras and is designed to stop the training process early if overfitting occurs. It adds a model number attribute to the base class for better logging and feedback.
 The following functions are available:
 * __init__(self, model_number, *args, **kwargs): Initializes the custom early stopping callback with the model number and passes any additional arguments to the base class.
 * on_train_end(self, logs=None): This method is called when the training process ends. It checks if the training was stopped early due to overfitting and prints a message with the stopped epoch and model number.
 
-Class: TqdmProgressCallback
+Class TqdmProgressCallback:
 This custom class extends the Callback class from Keras and is designed to display the training progress using the tqdm library. It shows the progress bar for each epoch and displays the training and validation metrics.
 The following functions are available:
 * on_train_begin(self, logs=None): This method is called when the training process begins. It sets the total number of epochs based on the training parameters.
@@ -44,7 +44,7 @@ The following functions are available:
 * on_batch_end(self, batch, logs=None): This method is called at the end of each batch. It updates the progress bar with the current batch's metrics.
 * on_epoch_end(self, epoch, logs=None): This method is called at the end of each epoch. It displays the validation metrics and closes the progress bar.
 
-Class: SaveModelsClass
+Class SaveModelsClass:
 This class is designed to save trained models as .h5 files and their details in a .csv file. It takes in the trained models and the desired .csv filename as input and saves the corresponding model details to disk.
 The following functions are available:
 * __init__(self, trained_models, csv_filename): The class constructor initializes the class with the trained models and the desired .csv filename. It calls the save_models_to_csv method to save the models and their details.
