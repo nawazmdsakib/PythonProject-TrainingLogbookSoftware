@@ -434,6 +434,14 @@ Exiting the software . . .
 ***Thank you***
 
 
+* Example of the details in CSV file:
+
+Model Name   Architecture                      Number of Epochs   Training Accuracy    Validation Accuracy   Training Loss        Validation Loss
+model_1      "Dense_1, Flatten",               1                  0.7812333106994629   0.8391000032424927    0.6662909388542175   0.493167906999588
+model_2      "Dense_1, Flatten",               1                  0.7467833161354065   0.8159000277519226    0.7057321667671204   0.529076099395752
+model_3      "Conv2D, MaxPooling2D, Flatten"   1                  0.8098833560943604   0.8377000093460083    0.5281296372413635   0.4474002420902252
+
+ 
 License:
 
 
