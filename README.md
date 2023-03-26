@@ -11,10 +11,10 @@ This software is designed to perform image classification tasks using deep learn
 This software has one main code Python file named main.py and 4 Class Python files named getDataset.py, getArchitecture.py, buildTrain.py, and saveModels.py. In getDataset.py file there is GetDatasetClass, in getArchitecture.py file there is GetArchitectureClass, in buildTrain.py file there are BuildTrainModelsClass, CustomEarlyStoppingand class, TqdmProgressCallback class, in saveModels.py file there is SaveModelsClass.
 
 Class GetDatasetClass:
-This class downloads the flower dataset and loads the Fashion MNIST dataset. It checks for an active internet connection before downloading and displays a progress bar during the download. It also plots a sample image from the dataset.
+This class downloads the flower dataset and loads the Fashion MNIST dataset. It checks for an active internet connection before downloading and during downloading. It aslo displays a progress bar during the download and plots a sample image from the dataset.
 The following functions are available:
-* __init__(self): The class constructor initializes the dataset by downloading the flower dataset, loading the Fashion MNIST dataset, setting the class names, and plotting a sample image.
-* download_file_with_progress(self, url, filename): This function downloads a file from a given URL with a progress bar, and saves it with the specified filename. If the download is successful, it returns the filename; otherwise, it returns False.
+* __init__(self): The class Constructor that initializes the class, checks for internet connectivity before and during downloading, and triggers the download and loading of the datasets. It also sets class names and plots a sample image.
+* download_file_with_progress(self, url, filename): This function downloads a file from a given URL with a progress bar, and saves it with the specified filename. If the download is successful, it returns the filename; otherwise, it returns None with OSError logs.
 * is_connected(self): This function checks if the device has an active internet connection by making a request to google.com. It returns True if connected and False otherwise.
 * plot_sample_image(self): This function plots a sample image from the dataset using the matplotlib.pyplot library.
 
@@ -150,7 +150,35 @@ Which function would you like to perform?
 Please choose a function between 1 to 4: 
 
 
-* If there is no internet
+* If internet connection is lost during the download process
+
+Dataset is downloading:
+
+ 20%|██        | 46.6M/229M [00:06<00:25, 7.23MiB/s]
+
+Error occurred: HTTPSConnectionPool(host='storage.googleapis.com', port=443): Read timed out.
+
+Data loading unsuccessful !!!
+
+Internet connection lost during the download process
+or other system-related operations failed
+
+Please ensure you have an internet connection to load the dataset
+or check your system error logs and try loading the file again
+
+Returning to the loading menu . . .
+
+Load a training dataset from below functions 
+
+ 1. Load default dataset
+ 2. Load data from url
+ 3. Exit to main menu
+ 4. Exit
+
+Enter your choice between 1 to 4: 
+
+
+* If there is no internet connection
 
 Data loading unsuccessfull !!!
 
